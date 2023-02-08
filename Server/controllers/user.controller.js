@@ -49,6 +49,8 @@ const loginUser = async (req, res) => {
           token,
           message: "User Loged In Successfully",
         });
+      } else {
+        res.status(400).send({ message: "Invalid user or Password" });
       }
     } catch (error) {
       return res.status(400).send({ message: "Invalid user or Password" });
@@ -60,7 +62,7 @@ const loginUser = async (req, res) => {
   }
 };
 const getProfile = async (req, res) => {
-  const { id, name, email } = req.user;
+  const { id } = req.user;
   try {
     const user = await User.findOne({ _id: id, isDeleted: false }).populate(
       "products"

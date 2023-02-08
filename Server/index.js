@@ -3,6 +3,7 @@
 const express = require("express");
 const productRoutes = require("./Routes/product.routes");
 const userRoutes = require("./Routes/user.routes");
+const cors = require("cors");
 
 //Step 2
 const app = express();
@@ -15,7 +16,11 @@ const PORT = 4000;
 //Midlleware => it uses to manipulate things before request
 //app.use is a global scope variable
 app.use(express.json()); // this is to convert the payload in JSON
-
+app.use(
+  cors({
+    cors: "*",
+  })
+);
 app.use((req, res, next) => {
   console.log("method: %s url: %s", req.method, req.url);
   next();

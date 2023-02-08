@@ -3,7 +3,8 @@ const User = require("../models/user.model");
 
 const getAllProducts = async (req, res) => {
   console.log("inside get all products api");
-  const products = await Product.find({});
+  const ownerId = req.user.id;
+  const products = await Product.find({ owner: ownerId });
   res.send({
     products,
     message: "all products fetched successfuly",
